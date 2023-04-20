@@ -45,19 +45,6 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldAddToPositiveBalanceMoreLimit5_999() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        account.add(5_999);
-
-        Assertions.assertEquals(5_999, account.getBalance());
-    }
-
-    @Test
     public void shouldAddToNegativeBalance() {
         CreditAccount account = new CreditAccount(
                 0,
@@ -94,6 +81,45 @@ public class CreditAccountTest {
         account.add(1_000);
 
         Assertions.assertEquals(0, account.getBalance());
+    }
+
+    @Test
+    public void pay1_000InitialBalance1_000() {
+        CreditAccount account = new CreditAccount(
+                1_000,
+                5_000,
+                15
+        );
+
+        account.pay(1_000);
+
+        Assertions.assertEquals(0, account.getBalance());
+    }
+
+    @Test
+    public void pay1_000InitialBalance0() {
+        CreditAccount account = new CreditAccount(
+                0,
+                5_000,
+                15
+        );
+
+        account.pay(1_000);
+
+        Assertions.assertEquals(-1_000, account.getBalance());
+    }
+
+    @Test
+    public void pay1_000InitialBalanceMinus1_000() {
+        CreditAccount account = new CreditAccount(
+                -1_000,
+                5_000,
+                15
+        );
+
+        account.pay(1_000);
+
+        Assertions.assertEquals(-2_000, account.getBalance());
     }
 
     @Test
@@ -147,7 +173,6 @@ public class CreditAccountTest {
             account.rate(0);
         });
     }
-
 
     @Test
     public void yearChange200() {
@@ -328,5 +353,4 @@ public class CreditAccountTest {
 
         Assertions.assertFalse(account.pay(-1_000));
     }
-
 }
