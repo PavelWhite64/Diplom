@@ -124,53 +124,34 @@ public class CreditAccountTest {
 
     @Test
     public void creditLimitMinus() {
-        CreditAccount account = new CreditAccount(
-                0,
-                -5_000,
-                15
-        );
 
         Assertions.assertThrows(IllegalAccessError.class, () -> {
-            account.creditLimit(-5_000);
+            CreditAccount account = new CreditAccount(0, -5_000, 15
+            );
         });
     }
 
     @Test
     public void creditLimit0() {
-        CreditAccount account = new CreditAccount(
-                0,
-                -5_000,
-                15
-        );
-
         Assertions.assertThrows(IllegalAccessError.class, () -> {
-            account.creditLimit(0);
+            CreditAccount account = new CreditAccount(0, 0, 15
+            );
         });
     }
 
     @Test
     public void rateMinus() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                -15
-        );
-
         Assertions.assertThrows(IllegalAccessError.class, () -> {
-            account.rate(-15);
+            CreditAccount account = new CreditAccount(0, 5_000, -15
+            );
         });
     }
 
     @Test
     public void rate0() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                0
-        );
-
         Assertions.assertThrows(IllegalAccessError.class, () -> {
-            account.rate(0);
+            CreditAccount account = new CreditAccount(0, 5_000, 0
+            );
         });
     }
 
