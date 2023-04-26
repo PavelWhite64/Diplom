@@ -28,7 +28,7 @@ public class CreditAccountTest {
 
         account.add(6_000);
 
-        Assertions.assertEquals(5_000, account.getBalance());
+        Assertions.assertEquals(0, account.getBalance());
     }
 
     @Test
@@ -125,7 +125,7 @@ public class CreditAccountTest {
     @Test
     public void creditLimitMinus() {
 
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(0, -5_000, 15
             );
         });
@@ -133,25 +133,22 @@ public class CreditAccountTest {
 
     @Test
     public void creditLimit0() {
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
-            CreditAccount account = new CreditAccount(0, 0, 15
-            );
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(0, 0, 15);
         });
     }
 
     @Test
     public void rateMinus() {
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
-            CreditAccount account = new CreditAccount(0, 5_000, -15
-            );
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(0, 5_000, -15);
         });
     }
 
     @Test
     public void rate0() {
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
-            CreditAccount account = new CreditAccount(0, 5_000, 0
-            );
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(0, 5_000, 0);
         });
     }
 
@@ -170,13 +167,13 @@ public class CreditAccountTest {
     @Test
     public void yearChangeMinus200() {
         CreditAccount account = new CreditAccount(
-                200,
+                -200,
                 5_000,
                 15
         );
         account.yearChange();
 
-        Assertions.assertEquals(30, account.yearChange());
+        Assertions.assertEquals(-30, account.yearChange());
     }
 
     @Test
